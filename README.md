@@ -266,21 +266,6 @@ python-dateutil>=2.8.0  # Date/time utilities
 
 ---
 
-## 📸 Screenshots
-
-<div align="center">
-
-### Main Interface
-![Main Interface](https://via.placeholder.com/800x500/667eea/ffffff?text=Main+Interface+Screenshot)
-
-### Data Preview
-![Data Preview](https://via.placeholder.com/800x400/764ba2/ffffff?text=Data+Preview+Screenshot)
-
-### Export Options
-![Export Options](https://via.placeholder.com/800x300/48bb78/ffffff?text=Export+Options+Screenshot)
-
-</div>
-
 ---
 
 ## 🔧 Usage
