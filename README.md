@@ -9,7 +9,7 @@
 
 **A powerful, user-friendly web application for generating realistic synthetic data**
 
-[🚀 **Live Demo**](https://synthetic-data-generator-for-machine-learning-project.streamlit.app/) • [📖 Documentation](#documentation) • [🐛 Report Bug](https://github.com/sarkarbikram90/Synthetic-Data-Generator/issues) • [✨ Request Feature](https://github.com/sarkarbikram90/Synthetic-Data-Generator/issues)
+[🚀 **Live Demo**](https://synthetic-data-generator-for-machine-learning-project.streamlit.app/) • [🐛 Report Bug](https://github.com/sarkarbikram90/Synthetic-Data-Generator/issues) • [✨ Request Feature](https://github.com/sarkarbikram90/Synthetic-Data-Generator/issues)
 
 </div>
 
@@ -43,7 +43,7 @@ The **Synthetic Data Generator** is a comprehensive web application built with S
 - **Development Speed**: Instant test data generation
 - **Compliance**: GDPR/CCPA compliant testing environments
 - **Cost Effective**: No need to purchase or license real datasets
-- **Scalable**: Generate from 10 to 10,000+ records instantly
+- **Scalable**: Generate from upto 5,000 records instantly
 
 ---
 
@@ -66,7 +66,7 @@ The **Synthetic Data Generator** is a comprehensive web application built with S
 - CSV, JSON, Excel formats
 - Individual file downloads
 - Bulk ZIP packages
-- Configurable data volumes (10-5000+ records)
+- Configurable data volumes (upto 5,000 records)
 
 ### ⚡ **High Performance**
 - Optimized data generation algorithms
@@ -189,7 +189,7 @@ REV00001,Smart Watch Pro,4,"Great battery life","This watch exceeded my expectat
 
 ### 🌐 **Option 1: Use Online (Recommended)**
 
-Visit the live application: **[Launch App →](https://your-app-name.streamlit.app)**
+Visit the live application: **[Launch App →](https://synthetic-data-generator-for-machine-learning-project.streamlit.app/)**
 
 1. Select your data type from the sidebar
 2. Configure the number of records
@@ -279,7 +279,7 @@ python-dateutil>=2.8.0  # Date/time utilities
 
 2. **Set Parameters**
    ```
-   Sidebar → Number of Records → Slide to desired amount (10-5000)
+   Sidebar → Number of Records → Slide to desired amount (upto 5,000)
    ```
 
 3. **Generate Data**
@@ -339,7 +339,6 @@ When selecting "Text Data", choose from:
 | 100     | < 1 second     | ~2 MB        | ~15 KB          |
 | 1,000   | ~2 seconds     | ~5 MB        | ~150 KB         |
 | 5,000   | ~8 seconds     | ~20 MB       | ~750 KB         |
-| 10,000  | ~15 seconds    | ~40 MB       | ~1.5 MB         |
 
 ### Optimization Tips
 
@@ -367,13 +366,6 @@ We welcome contributions from the community! Here's how you can help:
 3. Make your changes and add tests
 4. Ensure code quality: `pylint app.py`
 5. Submit a pull request
-
-### Contribution Guidelines
-
-- Follow PEP 8 style guidelines
-- Add docstrings to new functions
-- Include tests for new features
-- Update documentation as needed
 
 ---
 
@@ -432,10 +424,7 @@ copies or substantial portions of the Software.
 
 ### Special Thanks
 
-- The open-source community for inspiration and feedback
-- Beta testers who helped identify and fix issues
-- Contributors who've helped improve the codebase
-
+- The open-source community for inspiration
 ---
 
 ## 📞 Support
@@ -445,7 +434,7 @@ copies or substantial portions of the Software.
 - 📖 **Documentation**: Check this README and inline code comments
 - 🐛 **Bug Reports**: [GitHub Issues](https://github.com/sarkarbikram90/Synthetic-Data-Generator/issues)
 - 💡 **Feature Requests**: [GitHub Issues](https://github.com/sarkarbikram90/Synthetic-Data-Generator/issues)
-- 📧 **Contact**: [Your Email] (for urgent matters)
+- 📧 **Contact**: [sarkarbikram90@gmail.com] (for urgent matters)
 
 ### Community
 
