@@ -355,24 +355,7 @@ When selecting "Text Data", choose from:
 
 ---
 
-## 🤝 Contributing
 
-We welcome contributions from the community! Here's how you can help:
-
-### Ways to Contribute
-
-- 🐛 **Report Bugs**: [Open an issue](https://github.com/sarkarbikram90/Synthetic-Data-Generator/issues)
-- 💡 **Suggest Features**: [Request new functionality](https://github.com/sarkarbikram90/Synthetic-Data-Generator/issues)
-- 📝 **Improve Documentation**: Submit documentation improvements
-- 🔧 **Code Contributions**: Submit pull requests with new features or fixes
-
-### Development Setup
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature-name`
-3. Make your changes and add tests
-4. Ensure code quality: `pylint app.py`
-5. Submit a pull request
 
 ---
 
