@@ -23,11 +23,9 @@
 - [📊 Data Types](#-data-types)
 - [🚀 Quick Start](#-quick-start)
 - [🛠️ Installation](#️-installation)
-- [📸 Screenshots](#-screenshots)
 - [🔧 Usage](#-usage)
 - [⚙️ Configuration](#️-configuration)
 - [📈 Performance](#-performance)
-- [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
 - [🙏 Acknowledgments](#-acknowledgments)
 
@@ -41,7 +39,7 @@ The **Synthetic Data Generator** is a comprehensive web application built with S
 
 - **Privacy Protection**: No real customer data at risk
 - **Development Speed**: Instant test data generation
-- **Compliance**: GDPR/CCPA compliant testing environments
+- **Compliance**: GDPR/CCPA/DPDP compliant testing environments
 - **Cost Effective**: No need to purchase or license real datasets
 - **Scalable**: Generate upto 10,000 records instantly
 
@@ -362,12 +360,12 @@ python-dateutil>=2.8.0  # Date/time utilities
 
 1. **Configure Data Type**
    ```
-   Sidebar → Select Data Type → Choose from 5 options
+   Sidebar → Select Data Type → Choose from 7 options
    ```
 
 2. **Set Parameters**
    ```
-   Sidebar → Number of Records → Slide to desired amount (upto 5,000)
+   Sidebar → Number of Records → Slide to desired amount (upto 10,000)
    ```
 
 3. **Generate Data**
@@ -401,7 +399,7 @@ The application allows for extensive customization through the sidebar interface
 
 #### Data Volume
 - **Minimum**: 10 records (for quick testing)
-- **Maximum**: 5,000 records (for comprehensive datasets)
+- **Maximum**: 10,000 records (for comprehensive datasets)
 - **Recommendation**: Start with 100-500 records for initial evaluation
 
 #### Export Formats
