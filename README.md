@@ -43,7 +43,7 @@ The **Synthetic Data Generator** is a comprehensive web application built with S
 - **Development Speed**: Instant test data generation
 - **Compliance**: GDPR/CCPA compliant testing environments
 - **Cost Effective**: No need to purchase or license real datasets
-- **Scalable**: Generate from upto 10,000 records instantly
+- **Scalable**: Generate upto 10,000 records instantly
 
 ---
 
