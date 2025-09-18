@@ -43,7 +43,7 @@ The **Synthetic Data Generator** is a comprehensive web application built with S
 - **Development Speed**: Instant test data generation
 - **Compliance**: GDPR/CCPA compliant testing environments
 - **Cost Effective**: No need to purchase or license real datasets
-- **Scalable**: Generate from upto 5,000 records instantly
+- **Scalable**: Generate from upto 10,000 records instantly
 
 ---
 
@@ -56,17 +56,19 @@ The **Synthetic Data Generator** is a comprehensive web application built with S
 - Progress indicators and loading states
 
 ### 📊 **Multiple Data Types**
-- **Personal/Customer Data**: Names, addresses, demographics
-- **Sales Transactions**: E-commerce and retail data
-- **Employee Records**: HR and organizational data
-- **Time Series**: Analytics and IoT sensor data
-- **Text Content**: Reviews, posts, and social media
+  - **Personal/Customer Data**: Names, addresses, contact info
+  - **Sales Transactions**: Purchase records, revenue data
+  - **Employee Records**: HR data, performance metrics
+  - **Time Series**: Temporal data with trends
+  - **Text Data**: Reviews, posts, social media content
+  - **Application Logs**: System events, user actions, errors
+  - **System Data**: OS logs, metrics, security events
 
 ### 💾 **Flexible Export Options**
 - CSV, JSON, Excel formats
 - Individual file downloads
 - Bulk ZIP packages
-- Configurable data volumes (upto 5,000 records)
+- Configurable data volumes (upto 10,000 records)
 
 ### ⚡ **High Performance**
 - Optimized data generation algorithms
