@@ -199,19 +199,20 @@ Visit the live application: **[Launch App →](https://synthetic-data-generator-
 
 ### 💻 **Option 2: Run Locally**
 
-```bash
+
 # Clone the repository
+```bash
 git clone https://github.com/sarkarbikram90/Synthetic-Data-Generator.git
 ```
 ```bash
 cd Synthetic-Data-Generator
 ```
-```bash
 # Install dependencies
+```bash
 pip install -r requirements.txt
 ```
-```bash
 # Launch the application
+```bash
 streamlit run app.py
 ```
 
