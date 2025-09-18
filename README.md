@@ -185,6 +185,87 @@ REV00001,Smart Watch Pro,4,"Great battery life","This watch exceeded my expectat
 ```
 </details>
 
+<details>
+<summary><b>📊 Application Logs</b></summary>
+
+Perfect for testing log analysis tools, SIEM systems, and application monitoring:
+
+- **Application Lifecycle**: Start/stop events, deployments, health checks
+- **User Interactions**: Login attempts, button clicks, page views, form submissions  
+- **Data Generation**: Performance metrics, processing times, record counts
+- **File Operations**: Upload/download events, file validation, backup operations
+- **Error Tracking**: Exception handling, stack traces, severity levels
+- **Session Metrics**: User engagement, session duration, feature usage
+
+**Sample Output:**
+```csv
+timestamp,log_level,event_type,user_id,session_id,response_time_ms,success
+2024-12-17 10:31:15,INFO,BUTTON_CLICK,user_1234,abc123ef,250,true
+2024-12-17 10:31:45,ERROR,DatabaseConnectionError,user_5678,def456gh,5000,false
+```
+</details>
+
+<details>
+<summary><b>🖥️ System Data</b></summary>
+
+Enterprise-grade system monitoring data for infrastructure testing and analysis:
+
+### System Logs
+Operating system and service logs with realistic patterns:
+- **Services**: SSH, Nginx, MySQL, Docker, Systemd events
+- **Security**: Login attempts, authentication failures, access violations
+- **System Events**: Service starts/stops, configuration changes, errors
+- **Network**: Connection logs, firewall events, traffic patterns
+
+### Performance Metrics  
+Comprehensive system performance and resource utilization:
+- **CPU**: Usage percentages, load averages, core temperatures
+- **Memory**: RAM usage, swap utilization, buffer/cache statistics
+- **Disk I/O**: Read/write operations, throughput, queue depths
+- **Network**: Bandwidth utilization, packet rates, connection counts
+
+### Resource Usage
+Detailed per-process and per-service resource consumption:
+- **Process Details**: PIDs, command lines, parent relationships
+- **Resource Allocation**: CPU time, memory usage, file descriptors
+- **System Calls**: I/O operations, network activity, thread counts
+- **Performance**: Response times, error rates, throughput metrics
+
+### Security Events
+Security-focused monitoring and incident data:
+- **Authentication**: Login successes/failures, privilege escalations
+- **Network Security**: Intrusion attempts, firewall blocks, geo-location data
+- **Access Control**: File access, permission changes, audit trails
+- **Threat Intelligence**: Severity classifications, threat indicators
+
+### Infrastructure Monitoring
+Enterprise infrastructure health and availability data:
+- **Component Health**: Servers, databases, load balancers, storage systems
+- **Availability Metrics**: Uptime percentages, response times, error rates
+- **Hardware Status**: Temperature sensors, power consumption, firmware versions
+- **Maintenance**: Backup status, alert counts, scheduled maintenance windows
+
+**Sample Output - System Logs:**
+```csv
+timestamp,hostname,severity,service,message,source_ip,user
+2024-12-17 10:30:45,web-server-01,INFO,ssh,"Accepted password for admin from 192.168.1.100",192.168.1.100,admin
+2024-12-17 10:30:50,db-primary,ERROR,mysql,"Access denied for user 'backup'@'10.0.0.50'",10.0.0.50,backup
+```
+
+**Sample Output - Performance Metrics:**
+```csv
+timestamp,hostname,cpu_usage_percent,memory_usage_percent,disk_read_mb_per_sec,network_in_mbps
+2024-12-17 10:30:00,web-server-01,23.5,67.2,12.8,45.6
+2024-12-17 10:31:00,web-server-01,45.8,68.1,8.4,52.3
+```
+
+**Sample Output - Security Events:**
+```csv
+timestamp,hostname,event_type,severity,source_ip,action,threat_level,success
+2024-12-17 10:30:45,firewall,intrusion_attempt,HIGH,198.51.100.25,DENY,High,false
+2024-12-17 10:31:20,web-server-01,login_attempt,MEDIUM,203.0.113.45,ALLOW,Low,true
+```
+</details>
 ---
 
 ## 🚀 Quick Start
