@@ -202,11 +202,15 @@ Visit the live application: **[Launch App →](https://synthetic-data-generator-
 ```bash
 # Clone the repository
 git clone https://github.com/sarkarbikram90/Synthetic-Data-Generator.git
+```
+```bash
 cd Synthetic-Data-Generator
-
+```
+```bash
 # Install dependencies
 pip install -r requirements.txt
-
+```
+```bash
 # Launch the application
 streamlit run app.py
 ```
