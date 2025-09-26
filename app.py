@@ -73,8 +73,331 @@ st.markdown("""
         border-radius: 8px;
         text-align: center;
     }
+    
+    .landing-hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 4rem 2rem;
+        border-radius: 15px;
+        text-align: center;
+        margin: 2rem 0;
+    }
+    
+    .landing-hero h1 {
+        font-size: 3.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .landing-hero p {
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+    }
+    
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+    }
+    
+    .feature-item {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        border-top: 4px solid #667eea;
+        transition: transform 0.3s ease;
+    }
+    
+    .feature-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+    }
+    
+    .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+    
+    .cta-button {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 1rem 3rem;
+        border: none;
+        border-radius: 50px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+    
+    .cta-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+    }
+    
+    .stats-showcase {
+        background: #f8f9fa;
+        padding: 2rem;
+        border-radius: 10px;
+        margin: 2rem 0;
+    }
+    
+    .stats-row {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .stat-item {
+        text-align: center;
+        padding: 1rem;
+        min-width: 150px;
+    }
+    
+    .stat-number {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #667eea;
+    }
+    
+    .stat-label {
+        font-size: 1rem;
+        color: #666;
+        margin-top: 0.5rem;
+    }
 </style>
 """, unsafe_allow_html=True)
+
+def show_landing_page():
+    """Display the landing page"""
+    
+    logger.info("Landing page displayed")
+    
+    # Hero Section
+    st.markdown("""
+    <div class="landing-hero">
+        <h1>🎲 SynthData Generator</h1>
+        <p>Generate realistic, privacy-safe synthetic data for testing, development, and analysis</p>
+        <p style="font-size: 1.1rem; opacity: 0.8;">
+            Transform your synthetic data generation process with ease. No real data, no privacy risks, just pure synthetic goodness.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Call-to-Action
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        if st.button("🚀 Start Generating Data", key="cta_button", help="Click to access the data generator"):
+            st.session_state.show_app = True
+            st.rerun()
+    
+    # Features Grid
+    st.markdown("""
+    <div class="feature-grid">
+        <div class="feature-item">
+            <div class="feature-icon">👤</div>
+            <h3>Personal & Business Data</h3>
+            <p>Generate customer profiles, employee records, and sales transactions with realistic relationships and patterns.</p>
+        </div>
+        
+        <div class="feature-item">
+            <div class="feature-icon">📊</div>
+            <h3>System & Infrastructure</h3>
+            <p>Create VM metrics, application logs, and system monitoring data with intelligent correlations.</p>
+        </div>
+        
+        <div class="feature-item">
+            <div class="feature-icon">📈</div>
+            <h3>Time Series & Analytics</h3>
+            <p>Generate temporal data with realistic trends, seasonality, and statistical properties.</p>
+        </div>
+        
+        <div class="feature-item">
+            <div class="feature-icon">📝</div>
+            <h3>Text & Content</h3>
+            <p>Create product reviews, blog posts, and social media content with authentic language patterns.</p>
+        </div>
+        
+        <div class="feature-item">
+            <div class="feature-icon">🔗</div>
+            <h3>Correlated Datasets</h3>
+            <p>Generate multiple related datasets with shared timestamps and keys for comprehensive testing.</p>
+        </div>
+        
+        <div class="feature-item">
+            <div class="feature-icon">🔒</div>
+            <h3>Privacy-First Design</h3>
+            <p>100% synthetic data means zero privacy risk. GDPR compliant by design with no real data exposure.</p>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Stats Showcase
+    st.markdown("""
+    <div class="stats-showcase">
+        <h2 style="text-align: center; margin-bottom: 2rem;">Why Choose SynthData Generator?</h2>
+        <div class="stats-row">
+            <div class="stat-item">
+                <div class="stat-number">8+</div>
+                <div class="stat-label">Data Types</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">5000+</div>
+                <div class="stat-label">Records/Minute</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Export Formats</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Privacy Safe</div>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Use Cases Section
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.markdown("""
+        ### 🎯 **Perfect For**
+        
+        **Software Development Teams**
+        - Unit and integration testing
+        - Database seeding and migration testing
+        - Load testing and performance validation
+        - Demo environments and presentations
+        
+        **Data Science & Analytics**
+        - ML model training and validation
+        - Algorithm testing and benchmarking
+        - Data pipeline development
+        - Statistical analysis and research
+        
+        **DevOps & Infrastructure**
+        - Monitoring system validation
+        - Log analysis tool testing
+        - Alert rule development
+        - Capacity planning and scaling
+        """)
+    
+    with col2:
+        st.markdown("""
+        ### ✨ **Key Benefits**
+        
+        **Instant Data Generation**
+        - No waiting for data access approvals
+        - Generate thousands of records in seconds
+        - Consistent and reproducible datasets
+        
+        **Privacy & Compliance**
+        - Zero real customer data exposure
+        - GDPR and CCPA compliant by default
+        - No data residency concerns
+        
+        **Realistic & Intelligent**
+        - Maintains statistical properties
+        - Logical relationships between fields
+        - Industry-specific patterns and formats
+        
+        **Developer Friendly**
+        - Multiple export formats (CSV, JSON, Excel)
+        - Easy API integration potential
+        - Open source and customizable
+        """)
+    
+    # Industry Examples
+    st.markdown("""
+    ### 🏭 **Industry Use Cases**
+    """)
+    
+    industries_col1, industries_col2, industries_col3 = st.columns(3)
+    
+    with industries_col1:
+        st.markdown("""
+        **🏥 Healthcare**
+        - Patient record testing
+        - Clinical trial simulations
+        - Medical device data validation
+        - HIPAA-compliant development
+        """)
+    
+    with industries_col2:
+        st.markdown("""
+        **💰 Financial Services**
+        - Transaction processing testing
+        - Risk model validation
+        - Fraud detection training
+        - Regulatory compliance testing
+        """)
+    
+    with industries_col3:
+        st.markdown("""
+        **🛒 E-commerce**
+        - Customer behavior analysis
+        - Inventory management testing
+        - Recommendation system training
+        - A/B testing scenarios
+        """)
+    
+    # Technology Stack
+    st.markdown("""
+    ### 🔧 **Built With Modern Technology**
+    
+    - **Streamlit** - Interactive web application framework
+    - **Pandas & NumPy** - High-performance data manipulation
+    - **Faker Library** - Realistic fake data generation
+    - **Python Ecosystem** - Extensible and maintainable codebase
+    - **Cloud Ready** - Deploy anywhere with minimal setup
+    """)
+    
+    # Final CTA
+    st.markdown("---")
+    
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        st.markdown("""
+        <div style="text-align: center; padding: 2rem;">
+            <h3>Ready to Transform Your Development Workflow?</h3>
+            <p>Join thousands of developers who trust SynthData Generator for their testing needs</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        if st.button("🎲 Generate Your First Dataset", key="final_cta", help="Start using the synthetic data generator"):
+            st.session_state.show_app = True
+            st.rerun()
+    
+    # Footer
+    st.markdown("""
+    ---
+    <div style="text-align: center; color: #666; padding: 1rem;">
+        <p>
+            <strong>SynthData Generator</strong> - Privacy-first synthetic data for the modern world<br>
+            Built with ❤️ by Bikram, for Machine Learning Engineers and Developers<br>
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+# Initialize session state
+if 'show_app' not in st.session_state:
+    st.session_state.show_app = False
+
+# Route between landing page and main app
+if not st.session_state.show_app:
+    show_landing_page()
+else:
+    # Show navigation option to go back to landing
+    if st.sidebar.button("🏠 Back to Home", help="Return to landing page"):
+        st.session_state.show_app = False
+        st.rerun()
 
 class SyntheticDataGenerator:
     """Core class for generating synthetic data with comprehensive logging"""
@@ -1298,7 +1621,7 @@ def main():
             <p>1. Choose your data type from the sidebar</p>
             <p>2. Set the number of records to generate</p>
             <p>3. Select your preferred export format</p>
-            <p>4. Click "Generate Data" to create synthetic data</p>
+            <p>4. Click "Generate Synthetic Data"</p>
             <p>5. Preview and download your generated dataset</p>
         </div>
         """, unsafe_allow_html=True)
@@ -1313,7 +1636,6 @@ def main():
             - **Sales Transactions**: Purchase records, revenue data
             - **Employee Records**: HR data, performance metrics
             - **Time Series**: Temporal data with trends
-            - **Text Data**: Reviews, posts, social media content
             - **Application Logs**: System events, user actions, errors
             - **System Data**: OS logs, metrics, security events
             - **Correlated VM Data**: VM metrics + logs with matching timestamps
@@ -1325,7 +1647,7 @@ def main():
             - **Realistic Data**: Uses Faker library for authentic-looking data
             - **Multiple Formats**: CSV, JSON, Excel export options
             - **Instant Preview**: See your data before downloading
-            - **Scalable**: Generate from 10 to 5,000+ records
+            - **Scalable**: Generate from 50 to 10,000 records
             - **No Setup**: Ready to use immediately
             """)
 
