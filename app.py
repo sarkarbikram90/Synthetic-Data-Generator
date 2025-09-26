@@ -165,7 +165,7 @@ def show_landing_page():
     # Stats Showcase
     st.markdown("""
     <div class="stats-showcase">
-        <h2 style="text-align: center; margin-bottom: 2rem;">Why Choose Synthetic Data Generator?</h2>
+        <h2 style="text-align: center; margin-bottom: 2rem;">Synthetic Data Generator</h2>
         <div class="stats-row">
             <div class="stat-item">
                 <div class="stat-number">7+</div>
@@ -255,8 +255,8 @@ def show_landing_page():
     with col2:
         st.markdown("""
         <div style="text-align: center; padding: 2rem;">
-            <h3>Ready to Transform Your Development Workflow?</h3>
-            <p>Join thousands of developers who trust SynthData Generator for their testing needs</p>
+            <h3>Ready to Transform Your Data Science and ML Workflow?</h3>
+           
         </div>
         """, unsafe_allow_html=True)
         
@@ -1257,8 +1257,8 @@ def main():
     track_session_metrics()
     
     # Header
-    st.markdown('<h1 class="main-header">🎲 Synthetic Data Generator</h1>', unsafe_allow_html=True)
-    st.markdown("**Generate synthetic data for testing, development, and analysis**")
+    st.markdown('<h1 class="main-header"></h1>', unsafe_allow_html=True)
+    st.markdown("")
     
     # Initialize generator
     if 'generator' not in st.session_state:
