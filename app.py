@@ -192,13 +192,14 @@ class SyntheticDataGenerator:
                 if i > 0 and i % 1000 == 0:
                     logger.info(f"Generated {i}/{num_records} employee records")
                 
-                hire_date = self.fake.date_between(start_date='-5y', end_date='now')
-                
+                hire_date = self.fake.date_between(start_date='-10y', end_date='now')
+                first_name = self.fake.first_name()
+                last_name = self.fake.last_name()
                 record = {
-                    'employee_id': f"EMP{random.randint(1000, 9999)}",
-                    'first_name': self.fake.first_name(),
-                    'last_name': self.fake.last_name(),
-                    'email': self.fake.company_email(),
+                    'employee_id': f"EMP{random.randint(1, 100000)}",
+                    'first_name': first_name,
+                    'last_name': last_name,
+                    'email': f"{first_name.lower()}.{last_name.lower()}@example.com",
                     'department': random.choice(departments),
                     'position': f"{random.choice(positions)} {random.choice(departments).replace('s', '')}",
                     'hire_date': hire_date,
@@ -378,7 +379,7 @@ class SyntheticDataGenerator:
                         'version': f"{random.randint(1,3)}.{random.randint(0,9)}.{random.randint(0,9)}",
                         'environment': random.choice(['production', 'staging', 'development']),
                         'host': f"server-{random.randint(1,10)}.company.com",
-                        'duration_ms': random.randint(100, 5000) if 'START' in event else None
+                        'duration_ms': random.randint(100, 5000)
                     }
                 
                 elif log_type == 'user_interactions':
@@ -468,13 +469,13 @@ class SyntheticDataGenerator:
                         'severity': severity,
                         'message': f"{error_type}: {self.fake.sentence()}",
                         'stack_trace': f"at com.app.{random.choice(['service', 'controller', 'dao'])}.{self.fake.word()}({random.randint(1, 200)})",
-                        'user_id': f"user_{random.randint(1000, 9999)}" if random.choice([True, False]) else None,
+                        'user_id': f"user_{random.randint(10, 123456789)}",
                         'session_id': self.fake.uuid4()[:8],
                         'request_id': self.fake.uuid4(),
                         'application': random.choice(app_names),
                         'environment': random.choice(['production', 'staging', 'development']),
                         'host': f"server-{random.randint(1,10)}.company.com",
-                        'resolution_time_minutes': random.randint(1, 1440) if severity in ['HIGH', 'CRITICAL'] else None
+                        'resolution_time_minutes': random.randint(1, 2440)
                     }
                 
                 else:  # session_metrics
@@ -483,7 +484,7 @@ class SyntheticDataGenerator:
                     
                     event = random.choice(session_events)
                     session_id = self.fake.uuid4()[:8]
-                    user_id = f"user_{random.randint(1000, 9999)}"
+                    user_id = f"user_{random.randint(100, 100000)}"
                     
                     record = {
                         'timestamp': base_timestamp,
@@ -491,14 +492,14 @@ class SyntheticDataGenerator:
                         'event_type': event,
                         'user_id': user_id,
                         'session_id': session_id,
-                        'session_duration_minutes': random.randint(1, 480) if event == 'SESSION_END' else None,
+                        'session_duration_minutes': random.randint(1, 480),
                         'pages_viewed': random.randint(1, 50),
                         'actions_performed': random.randint(0, 100),
                         'data_generated_records': random.randint(0, 1000),
                         'files_downloaded': random.randint(0, 10),
                         'ip_address': self.fake.ipv4(),
                         'location': f"{self.fake.city()}, {self.fake.country()}",
-                        'device_info': f"{random.choice(['Chrome', 'Firefox', 'Safari', 'Edge'])} on {random.choice(['Windows', 'macOS', 'Linux', 'iOS', 'Android'])}",
+                        'device_info': f"{random.choice(['Chrome', 'Firefox', 'Safari', 'Edge'])} on {random.choice(['Windows', 'MacOS', 'Linux', 'iOS', 'Android', 'ChromeOS'])}",
                         'engagement_score': round(random.uniform(0.1, 1.0), 3),
                         'bounce_rate': round(random.uniform(0.0, 1.0), 3)
                     }
@@ -530,7 +531,7 @@ class SyntheticDataGenerator:
             hostnames = ['web-server-01', 'web-server-02', 'db-primary', 'db-replica', 'cache-redis-01',
                         'api-gateway', 'load-balancer', 'worker-node-01', 'worker-node-02', 'monitoring-server']
             
-            operating_systems = ['Ubuntu 20.04', 'CentOS 8', 'RHEL 8', 'Amazon Linux 2', 'Windows Server 2019']
+            operating_systems = ['Ubuntu 20.04', 'CentOS 8', 'RHEL 8', 'Amazon Linux 2', 'Windows Server 2019', 'ChromeOS 2025']
             
             services = ['nginx', 'apache2', 'mysql', 'postgresql', 'redis', 'docker', 'kubelet', 
                        'ssh', 'systemd', 'cron', 'fail2ban', 'firewall']
@@ -619,12 +620,13 @@ class SyntheticDataGenerator:
                         'service': service,
                         'process_id': random.randint(1, 99999),
                         'message': message,
-                        'source_ip': self.fake.ipv4() if random.choice([True, False]) else None,
-                        'user': self.fake.user_name() if service in ['ssh', 'sudo', 'login'] else None,
-                        'command': random.choice(['ls', 'cd', 'vim', 'sudo', 'systemctl']) if service == 'bash' else None,
-                        'file_path': f"/var/log/{service}.log" if random.choice([True, False]) else None,
-                        'error_code': random.randint(1, 255) if level in ['ERROR', 'CRIT'] else None,
-                        'bytes_transferred': random.randint(1024, 1048576) if service in ['nginx', 'apache2'] else None
+                        'source_ip': self.fake.ipv4(),
+                        'destination_ip': self.fake.ipv4(),
+                        'user': self.fake.user_name(),
+                        'command': random.choice(['ls', 'cd', 'vim', 'sudo', 'systemctl']),
+                        'file_path': f"/var/log/{service}.log",
+                        'error_code': random.randint(1, 255),
+                        'bytes_transferred': random.randint(1024, 1048576),
                     }
                 
                 elif system_type == 'performance_metrics':
@@ -709,7 +711,7 @@ class SyntheticDataGenerator:
                         'priority': random.randint(-20, 19),
                         'nice_value': random.randint(-20, 19),
                         'start_time': self.fake.date_time_between(start_date='-30d', end_date=base_timestamp),
-                        'command_line': f"/usr/bin/{service}" + (f" --config /etc/{service}.conf" if random.choice([True, False]) else "")
+                        'command_line': f"/usr/bin/{service}" + (f" --config /etc/{service}.conf")
                     }
                 
                 elif system_type == 'security_events':
@@ -779,9 +781,9 @@ class SyntheticDataGenerator:
                         'availability_percent': round(random.uniform(95, 100), 3) if health_status == 'healthy' else round(random.uniform(60, 95), 3),
                         'response_time_ms': response_time,
                         'error_rate_percent': round(random.uniform(0, 0.5), 3) if health_status == 'healthy' else round(random.uniform(1, 10), 3),
-                        'throughput_requests_per_sec': random.randint(10, 10000) if component_type in ['server', 'load_balancer'] else None,
-                        'connection_count': random.randint(5, 1000) if component_type in ['database', 'cache'] else None,
-                        'queue_depth': random.randint(0, 100) if component_type in ['database', 'storage'] else None,
+                        'throughput_requests_per_sec': random.randint(10, 10000),
+                        'connection_count': random.randint(5, 1000),
+                        'queue_depth': random.randint(0, 100),
                         'temperature_celsius': round(random.uniform(30, 80), 1),
                         'power_consumption_watts': random.randint(50, 800),
                         'network_latency_ms': round(random.uniform(0.1, 50), 2),
@@ -789,7 +791,7 @@ class SyntheticDataGenerator:
                         'last_maintenance': self.fake.date_between(start_date='-90d', end_date='-1d'),
                         'firmware_version': f"{random.randint(1,3)}.{random.randint(0,9)}.{random.randint(0,20)}",
                         'alerts_count': random.randint(0, 5),
-                        'backup_status': random.choice(['completed', 'failed', 'in_progress', 'scheduled']) if component_type in ['database', 'storage'] else None
+                        'backup_status': random.choice(['completed', 'failed', 'in_progress', 'scheduled'])
                     }
                 
                 data.append(record)
