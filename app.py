@@ -95,7 +95,6 @@ class SyntheticDataGenerator:
                 # Log progress for large datasets
                 if i > 0 and i % 1000 == 0:
                     logger.info(f"Generated {i}/{num_records} personal records")
-                
                 first_name = self.fake.first_name()
                 last_name = self.fake.last_name()
                 record = {
@@ -111,8 +110,8 @@ class SyntheticDataGenerator:
                     'birth_date': self.fake.date_of_birth(minimum_age=18, maximum_age=80),
                     'gender': random.choice(['Male', 'Female', 'Other']),
                     'occupation': self.fake.job(),
-                    'salary': random.randint(15000, 1500000),
-                    'created_at': self.fake.date_time_between(start_date='-10y', end_date='now')
+                    'salary': random.randint(30000, 150000),
+                    'created_at': self.fake.date_time_between(start_date='-12y', end_date='now')
                 }
                 data.append(record)
             
@@ -193,13 +192,14 @@ class SyntheticDataGenerator:
                     logger.info(f"Generated {i}/{num_records} employee records")
                 
                 hire_date = self.fake.date_between(start_date='-10y', end_date='now')
+                
                 first_name = self.fake.first_name()
                 last_name = self.fake.last_name()
                 record = {
-                    'employee_id': f"EMP{random.randint(1, 100000)}",
+                    'employee_id': f"EMP{random.randint(1, 100001)}",
                     'first_name': first_name,
                     'last_name': last_name,
-                    'email': f"{first_name.lower()}.{last_name.lower()}@example.com",
+                    'email': f"{first_name.lower()}.{last_name.lower()}@{self.fake.company_email().split('@')[1]}",
                     'department': random.choice(departments),
                     'position': f"{random.choice(positions)} {random.choice(departments).replace('s', '')}",
                     'hire_date': hire_date,
@@ -265,69 +265,8 @@ class SyntheticDataGenerator:
             logger.error(f"Time series generation failed: {str(e)}")
             raise
     
-    def generate_text_data(self, num_records: int, text_type: str) -> pd.DataFrame:
-        """Generate text data with logging"""
-        
-        logger.info(f"Starting text data generation - Records: {num_records}, Type: {text_type}")
-        start_time = datetime.now()
-        
-        try:
-            data = []
+             
             
-            for i in range(num_records):
-                # Log progress for large datasets
-                if i > 0 and i % 1000 == 0:
-                    logger.info(f"Generated {i}/{num_records} text records")
-                
-                if text_type == 'reviews':
-                    record = {
-                        'review_id': f"REV{i+1:05d}",
-                        'product_name': self.fake.catch_phrase(),
-                        'reviewer_name': self.fake.name(),
-                        'rating': random.randint(1, 5),
-                        'review_title': self.fake.sentence(nb_words=6)[:-1],
-                        'review_text': self.fake.text(max_nb_chars=300),
-                        'helpful_votes': random.randint(0, 100),
-                        'review_date': self.fake.date_between(start_date='-1y', end_date='now')
-                    }
-                elif text_type == 'blog_posts':
-                    record = {
-                        'post_id': f"POST{i+1:05d}",
-                        'title': self.fake.sentence(nb_words=8)[:-1],
-                        'author': self.fake.name(),
-                        'content': self.fake.text(max_nb_chars=500),
-                        'tags': ', '.join(self.fake.words(nb=3)),
-                        'views': random.randint(100, 10000),
-                        'likes': random.randint(5, 500),
-                        'publish_date': self.fake.date_between(start_date='-6m', end_date='now')
-                    }
-                else:  # social_media
-                    record = {
-                        'post_id': f"SM{i+1:06d}",
-                        'username': self.fake.user_name(),
-                        'platform': random.choice(['Twitter(X)', 'Facebook', 'Instagram', 'LinkedIn']),
-                        'post_text': self.fake.text(max_nb_chars=150),
-                        'hashtags': ' '.join([f"#{word}" for word in self.fake.words(nb=2)]),
-                        'likes': random.randint(0, 1000),
-                        'shares': random.randint(0, 100),
-                        'comments': random.randint(0, 50),
-                        'post_datetime': self.fake.date_time_between(start_date='-30d', end_date='now')
-                    }
-                
-                data.append(record)
-            
-            df = pd.DataFrame(data)
-            generation_time = (datetime.now() - start_time).total_seconds()
-            memory_usage = df.memory_usage(deep=True).sum() / 1024 / 1024
-            
-            logger.info(f"Text data generation completed - Records: {len(df)}, Type: {text_type}, "
-                       f"Time: {generation_time:.2f}s, Memory: {memory_usage:.2f}MB")
-            return df
-            
-        except Exception as e:
-            logger.error(f"Text data generation failed: {str(e)}")
-            raise
-
     def generate_log_data(self, num_records: int, log_type: str) -> pd.DataFrame:
         """Generate realistic application log data with logging"""
         
@@ -379,7 +318,7 @@ class SyntheticDataGenerator:
                         'version': f"{random.randint(1,3)}.{random.randint(0,9)}.{random.randint(0,9)}",
                         'environment': random.choice(['production', 'staging', 'development']),
                         'host': f"server-{random.randint(1,10)}.company.com",
-                        'duration_ms': random.randint(100, 5000)
+                        'duration_ms': random.randint(100, 5000) if 'START' in event else None
                     }
                 
                 elif log_type == 'user_interactions':
@@ -387,7 +326,7 @@ class SyntheticDataGenerator:
                               'FILE_UPLOAD', 'SEARCH', 'FILTER_APPLIED', 'EXPORT_DATA', 'SETTINGS_CHANGED']
                     
                     action = random.choice(actions)
-                    user_id = f"user_{random.randint(1000, 9999)}"
+                    user_id = f"user_{random.randint(1, 123456789)}"
                     session_id = self.fake.uuid4()[:8]
                     
                     record = {
@@ -469,13 +408,13 @@ class SyntheticDataGenerator:
                         'severity': severity,
                         'message': f"{error_type}: {self.fake.sentence()}",
                         'stack_trace': f"at com.app.{random.choice(['service', 'controller', 'dao'])}.{self.fake.word()}({random.randint(1, 200)})",
-                        'user_id': f"user_{random.randint(10, 123456789)}",
+                        'user_id': f"user_{random.randint(1, 123456789)}",
                         'session_id': self.fake.uuid4()[:8],
                         'request_id': self.fake.uuid4(),
                         'application': random.choice(app_names),
                         'environment': random.choice(['production', 'staging', 'development']),
                         'host': f"server-{random.randint(1,10)}.company.com",
-                        'resolution_time_minutes': random.randint(1, 2440)
+                        'resolution_time_minutes': random.randint(1, 1440),
                     }
                 
                 else:  # session_metrics
@@ -484,7 +423,7 @@ class SyntheticDataGenerator:
                     
                     event = random.choice(session_events)
                     session_id = self.fake.uuid4()[:8]
-                    user_id = f"user_{random.randint(100, 100000)}"
+                    user_id = f"user_{random.randint(1, 123456789)}"
                     
                     record = {
                         'timestamp': base_timestamp,
@@ -492,14 +431,14 @@ class SyntheticDataGenerator:
                         'event_type': event,
                         'user_id': user_id,
                         'session_id': session_id,
-                        'session_duration_minutes': random.randint(1, 480),
+                        'session_duration_minutes': random.randint(1, 480) if event == 'SESSION_END' else None,
                         'pages_viewed': random.randint(1, 50),
                         'actions_performed': random.randint(0, 100),
                         'data_generated_records': random.randint(0, 1000),
                         'files_downloaded': random.randint(0, 10),
                         'ip_address': self.fake.ipv4(),
                         'location': f"{self.fake.city()}, {self.fake.country()}",
-                        'device_info': f"{random.choice(['Chrome', 'Firefox', 'Safari', 'Edge'])} on {random.choice(['Windows', 'MacOS', 'Linux', 'iOS', 'Android', 'ChromeOS'])}",
+                        'device_info': f"{random.choice(['Chrome', 'Firefox', 'Safari', 'Edge'])} on {random.choice(['Windows', 'macOS', 'Linux', 'iOS', 'Android', 'ChromeOS'])}",
                         'engagement_score': round(random.uniform(0.1, 1.0), 3),
                         'bounce_rate': round(random.uniform(0.0, 1.0), 3)
                     }
@@ -531,7 +470,7 @@ class SyntheticDataGenerator:
             hostnames = ['web-server-01', 'web-server-02', 'db-primary', 'db-replica', 'cache-redis-01',
                         'api-gateway', 'load-balancer', 'worker-node-01', 'worker-node-02', 'monitoring-server']
             
-            operating_systems = ['Ubuntu 20.04', 'CentOS 8', 'RHEL 8', 'Amazon Linux 2', 'Windows Server 2019', 'ChromeOS 2025']
+            operating_systems = ['Ubuntu 20.04', 'CentOS 8', 'RHEL 8', 'Amazon Linux 2', 'Windows Server 2019']
             
             services = ['nginx', 'apache2', 'mysql', 'postgresql', 'redis', 'docker', 'kubelet', 
                        'ssh', 'systemd', 'cron', 'fail2ban', 'firewall']
@@ -620,13 +559,12 @@ class SyntheticDataGenerator:
                         'service': service,
                         'process_id': random.randint(1, 99999),
                         'message': message,
-                        'source_ip': self.fake.ipv4(),
-                        'destination_ip': self.fake.ipv4(),
-                        'user': self.fake.user_name(),
-                        'command': random.choice(['ls', 'cd', 'vim', 'sudo', 'systemctl']),
-                        'file_path': f"/var/log/{service}.log",
-                        'error_code': random.randint(1, 255),
-                        'bytes_transferred': random.randint(1024, 1048576),
+                        'source_ip': self.fake.ipv4() if random.choice([True, False]) else None,
+                        'user': self.fake.user_name() if service in ['ssh', 'sudo', 'login'] else None,
+                        'command': random.choice(['ls', 'cd', 'vim', 'sudo', 'systemctl']) if service == 'bash' else None,
+                        'file_path': f"/var/log/{service}.log" if random.choice([True, False]) else None,
+                        'error_code': random.randint(1, 255) if level in ['ERROR', 'CRIT'] else None,
+                        'bytes_transferred': random.randint(1024, 1048576)
                     }
                 
                 elif system_type == 'performance_metrics':
@@ -686,15 +624,15 @@ class SyntheticDataGenerator:
                 elif system_type == 'resource_usage':
                     # Generate detailed resource usage metrics per service/process
                     
-                    service = random.choice(services + ['java', 'python3', 'node', 'php-fpm', 'ruby'])
-                    process_count = random.randint(1, 20)
+                    service = random.choice(services + ['java', 'python', 'node', 'php-fpm', 'ruby', 'Rust', 'Go', 'perl', 'C++'])
+                    process_count = random.randint(1, 100000)
                     
                     record = {
                         'timestamp': base_timestamp,
                         'hostname': hostname,
                         'service_name': service,
                         'process_id': random.randint(1000, 99999),
-                        'parent_process_id': random.randint(1, 1000),
+                        'parent_process_id': random.randint(1, 1000000),
                         'process_count': process_count,
                         'cpu_percent': round(random.uniform(0, 25), 2),
                         'memory_mb': round(random.uniform(10, 2048), 2),
@@ -711,7 +649,7 @@ class SyntheticDataGenerator:
                         'priority': random.randint(-20, 19),
                         'nice_value': random.randint(-20, 19),
                         'start_time': self.fake.date_time_between(start_date='-30d', end_date=base_timestamp),
-                        'command_line': f"/usr/bin/{service}" + (f" --config /etc/{service}.conf")
+                        'command_line': f"/usr/bin/{service}" + (f" --config /etc/{service}.conf" if random.choice([True, False]) else "")
                     }
                 
                 elif system_type == 'security_events':
@@ -781,9 +719,9 @@ class SyntheticDataGenerator:
                         'availability_percent': round(random.uniform(95, 100), 3) if health_status == 'healthy' else round(random.uniform(60, 95), 3),
                         'response_time_ms': response_time,
                         'error_rate_percent': round(random.uniform(0, 0.5), 3) if health_status == 'healthy' else round(random.uniform(1, 10), 3),
-                        'throughput_requests_per_sec': random.randint(10, 10000),
-                        'connection_count': random.randint(5, 1000),
-                        'queue_depth': random.randint(0, 100),
+                        'throughput_requests_per_sec': random.randint(10, 10000) if component_type in ['server', 'load_balancer'] else None,
+                        'connection_count': random.randint(5, 1000) if component_type in ['database', 'cache'] else None,
+                        'queue_depth': random.randint(0, 100) if component_type in ['database', 'storage'] else None,
                         'temperature_celsius': round(random.uniform(30, 80), 1),
                         'power_consumption_watts': random.randint(50, 800),
                         'network_latency_ms': round(random.uniform(0.1, 50), 2),
@@ -791,7 +729,7 @@ class SyntheticDataGenerator:
                         'last_maintenance': self.fake.date_between(start_date='-90d', end_date='-1d'),
                         'firmware_version': f"{random.randint(1,3)}.{random.randint(0,9)}.{random.randint(0,20)}",
                         'alerts_count': random.randint(0, 5),
-                        'backup_status': random.choice(['completed', 'failed', 'in_progress', 'scheduled'])
+                        'backup_status': random.choice(['completed', 'failed', 'in_progress', 'scheduled']) if component_type in ['database', 'storage'] else None
                     }
                 
                 data.append(record)
@@ -806,6 +744,250 @@ class SyntheticDataGenerator:
             
         except Exception as e:
             logger.error(f"System data generation failed: {str(e)}")
+            raise
+
+    def generate_correlated_vm_data(self, num_records: int, correlation_type: str) -> tuple:
+        """Generate correlated VM metrics and application logs with matching timestamps"""
+        
+        logger.info(f"Starting correlated VM data generation - Records: {num_records}, Type: {correlation_type}")
+        start_time = datetime.now()
+        
+        try:
+            # Define VM and service configurations
+            vm_hosts = ['vm-web-01', 'vm-web-02', 'vm-api-01', 'vm-api-02', 'vm-db-01', 'vm-db-02', 
+                       'vm-cache-01', 'vm-worker-01', 'vm-worker-02', 'vm-monitoring-01', 'vm-monitoring-02']
+            
+            services_by_host = {
+                'vm-web-01': ['nginx', 'php-fpm', 'redis'],
+                'vm-web-02': ['nginx', 'php-fpm', 'redis'],
+                'vm-api-01': ['java', 'tomcat', 'mysql-client'],
+                'vm-api-02': ['java', 'tomcat', 'mysql-client'],
+                'vm-db-01': ['mysql', 'mysqld_safe', 'backup-agent'],
+                'vm-db-02': ['mysql', 'mysqld_safe', 'backup-agent'],
+                'vm-cache-01': ['redis', 'redis-sentinel', 'monitoring'],
+                'vm-worker-01': ['python', 'celery', 'rabbitmq'],
+                'vm-worker-02': ['python', 'celery', 'rabbitmq'],
+                'vm-monitoring-01': ['prometheus', 'grafana', 'alertmanager'],
+                'vm-monitoring-02': ['prometheus', 'grafana', 'alertmanager']
+            }
+            
+            # Generate base timestamps (every 5 minutes for the specified period)
+            base_time = datetime.now() - timedelta(hours=24)  # Last 24 hours
+            timestamps = []
+            current_time = base_time
+            
+            for _ in range(num_records):
+                timestamps.append(current_time)
+                current_time += timedelta(minutes=5)
+            
+            vm_metrics_data = []
+            app_logs_data = []
+            
+            # Track system states for correlation
+            host_states = {}
+            
+            for i, timestamp in enumerate(timestamps):
+                # Select a host for this time period
+                hostname = random.choice(vm_hosts)
+                
+                # Initialize host state if not exists
+                if hostname not in host_states:
+                    host_states[hostname] = {
+                        'base_cpu': random.uniform(10, 30),
+                        'base_memory': random.uniform(40, 70),
+                        'incident_mode': False,
+                        'incident_start': None,
+                        'incident_duration': 0
+                    }
+                
+                host_state = host_states[hostname]
+                
+                # Determine if we should simulate an incident (high load/error scenario)
+                if correlation_type == 'performance_issues':
+                    # 10% chance to start an incident, incidents last 15-45 minutes
+                    if not host_state['incident_mode'] and random.random() < 0.1:
+                        host_state['incident_mode'] = True
+                        host_state['incident_start'] = timestamp
+                        host_state['incident_duration'] = random.randint(3, 9)  # 3-9 intervals (15-45 min)
+                    
+                    # Check if incident should end
+                    if host_state['incident_mode']:
+                        elapsed_intervals = (timestamp - host_state['incident_start']).total_seconds() / 300  # 5-min intervals
+                        if elapsed_intervals >= host_state['incident_duration']:
+                            host_state['incident_mode'] = False
+                
+                # Generate VM Metrics based on correlation scenario
+                if host_state['incident_mode']:
+                    # High load scenario
+                    cpu_percent = min(95, host_state['base_cpu'] + random.uniform(40, 60))
+                    memory_percent = min(95, host_state['base_memory'] + random.uniform(20, 40))
+                    disk_read_ops = random.randint(500, 2000)
+                    disk_write_ops = random.randint(200, 800)
+                    network_in = random.uniform(50, 200)
+                    network_out = random.uniform(30, 150)
+                    available_memory_bytes = random.randint(500000000, 2000000000)  # 0.5-2GB low
+                    error_likely = True
+                else:
+                    # Normal operation
+                    cpu_percent = host_state['base_cpu'] + random.uniform(-5, 15)
+                    memory_percent = host_state['base_memory'] + random.uniform(-10, 15)
+                    disk_read_ops = random.randint(10, 200)
+                    disk_write_ops = random.randint(5, 100)
+                    network_in = random.uniform(5, 50)
+                    network_out = random.uniform(3, 30)
+                    available_memory_bytes = random.randint(4000000000, 8000000000)  # 4-8GB normal
+                    error_likely = False
+                
+                # VM Metrics Record
+                vm_record = {
+                    'timestamp': timestamp,
+                    'hostname': hostname,
+                    'cpu_usage_percent': round(max(0, min(100, cpu_percent)), 2),
+                    'memory_usage_percent': round(max(0, min(100, memory_percent)), 2),
+                    'available_memory_bytes': available_memory_bytes,
+                    'available_memory_percentage': round(100 - memory_percent, 2),
+                    'disk_read_operations': disk_read_ops,
+                    'disk_write_operations': disk_write_ops,
+                    'network_in_mbps': round(network_in, 2),
+                    'network_out_mbps': round(network_out, 2),
+                    'network_packets_in': random.randint(100, 5000),
+                    'network_packets_out': random.randint(80, 4000),
+                    'disk_usage_percent': round(random.uniform(30, 85), 2),
+                    'load_average_1min': round(cpu_percent / 25, 2),  # Correlated with CPU
+                    'load_average_5min': round(cpu_percent / 30, 2),
+                    'active_connections': random.randint(10, 500),
+                    'running_processes': random.randint(80, 300)
+                }
+                
+                vm_metrics_data.append(vm_record)
+                
+                # Generate correlated Application Logs (multiple log entries per timestamp)
+                services = services_by_host.get(hostname, ['unknown-service'])
+                log_entries_count = random.randint(1, 5)  # 1-5 log entries per time interval
+                
+                for log_idx in range(log_entries_count):
+                    service = random.choice(services)
+                    process_id = random.randint(1000, 9999)
+                    
+                    # Determine log level and message based on system state
+                    if error_likely and random.random() < 0.4:  # 40% chance of errors during incidents
+                        log_level = random.choice(['ERROR', 'WARN', 'CRIT'])
+                        
+                        error_messages = {
+                            'nginx': [
+                                f"worker process {process_id} exited on signal 11",
+                                "upstream timed out while connecting to upstream",
+                                f"client intended to send too large body: {random.randint(1000000, 10000000)} bytes",
+                                "SSL_do_handshake() failed (SSL: error)"
+                            ],
+                            'mysql': [
+                                f"Aborted connection {random.randint(100, 999)} to db: 'production'",
+                                "Too many connections",
+                                f"Lock wait timeout exceeded; try restarting transaction",
+                                f"Out of memory (Needed {random.randint(1000, 9999)} bytes)"
+                            ],
+                            'java': [
+                                f"OutOfMemoryError: Java heap space at {random.choice(['com.app.service', 'com.app.controller'])}",
+                                f"Connection pool exhausted - {random.randint(50, 200)} active connections",
+                                f"Response time exceeded {random.randint(5000, 30000)}ms threshold",
+                                "GarbageCollector: Full GC taking too long"
+                            ],
+                            'redis': [
+                                "WARNING: memory usage is getting high",
+                                f"Client connection from {self.fake.ipv4()} timed out",
+                                "Background saving error",
+                                f"Slow query detected: {random.randint(1000, 5000)}ms"
+                            ]
+                        }
+                        
+                        message = random.choice(error_messages.get(service, ["System error occurred", "Service unavailable"]))
+                        error_code = random.randint(400, 599)
+                        bytes_transferred = random.randint(0, 1000)  # Lower during errors
+                        
+                    else:
+                        # Normal operation logs
+                        log_level = random.choice(['INFO', 'DEBUG'])
+                        
+                        normal_messages = {
+                            'nginx': [
+                                f"GET /api/v1/users HTTP/1.1 200 {random.randint(1000, 50000)}",
+                                f"POST /api/v1/orders HTTP/1.1 201 {random.randint(500, 5000)}",
+                                "worker processes started",
+                                "configuration reloaded"
+                            ],
+                            'mysql': [
+                                f"Query executed successfully in {random.randint(10, 500)}ms",
+                                f"Connection established from {self.fake.ipv4()}",
+                                "Backup completed successfully",
+                                f"Index optimization completed on table_{random.randint(1, 10)}"
+                            ],
+                            'java': [
+                                f"Request processed in {random.randint(50, 2000)}ms",
+                                "Application started successfully",
+                                f"Cache hit ratio: {random.randint(80, 99)}%",
+                                f"Thread pool active: {random.randint(5, 50)} threads"
+                            ],
+                            'redis': [
+                                f"GET key_{random.randint(1000, 9999)} executed in {random.randint(1, 10)}ms",
+                                "Background save completed",
+                                f"Memory usage: {random.randint(10, 80)}%",
+                                f"Connected clients: {random.randint(1, 100)}"
+                            ]
+                        }
+                        
+                        message = random.choice(normal_messages.get(service, ["Service running normally", "Operation completed"]))
+                        error_code = None
+                        bytes_transferred = random.randint(1000, 100000)  # Higher during normal ops
+                    
+                    # Generate correlated network information
+                    if random.choice([True, False]):
+                        source_ip = self.fake.ipv4_private()  # Internal IP
+                        destination_ip = self.fake.ipv4()     # External IP
+                    else:
+                        source_ip = self.fake.ipv4()          # External IP
+                        destination_ip = self.fake.ipv4_private()  # Internal IP
+                    
+                    # Application Log Record
+                    log_record = {
+                        'timestamp': timestamp + timedelta(seconds=random.randint(0, 299)),  # Within the 5-min window
+                        'hostname': hostname,  # MATCHES VM metrics hostname
+                        'service': service,
+                        'process_id': process_id,
+                        'log_level': log_level,
+                        'message': message,
+                        'source_ip': source_ip,
+                        'destination_ip': destination_ip,
+                        'source_port': random.randint(1024, 65535),
+                        'destination_port': random.choice([80, 443, 3306, 5432, 6379, 8080, 9200]),
+                        'error_code': error_code,
+                        'bytes_transferred': bytes_transferred,
+                        'response_time_ms': random.randint(10, 5000),
+                        'user_agent': random.choice([
+                            'curl/7.68.0',
+                            'PostmanRuntime/7.28.4',
+                            'python-requests/2.25.1',
+                            'Apache-HttpClient/4.5.13',
+                            'Go-http-client/1.1'
+                        ]) if service in ['nginx', 'java'] else None,
+                        'request_id': self.fake.uuid4()[:12],
+                        'session_id': self.fake.uuid4()[:8] if random.choice([True, False]) else None
+                    }
+                    
+                    app_logs_data.append(log_record)
+            
+            # Create DataFrames
+            vm_metrics_df = pd.DataFrame(vm_metrics_data)
+            app_logs_df = pd.DataFrame(app_logs_data)
+            
+            generation_time = (datetime.now() - start_time).total_seconds()
+            
+            logger.info(f"Correlated VM data generation completed - VM Metrics: {len(vm_metrics_df)}, "
+                       f"App Logs: {len(app_logs_df)}, Time: {generation_time:.2f}s")
+            
+            return vm_metrics_df, app_logs_df
+            
+        except Exception as e:
+            logger.error(f"Correlated VM data generation failed: {str(e)}")
             raise
 
 def create_download_files(df, export_format):
@@ -875,7 +1057,7 @@ def main():
     
     # Header
     st.markdown('<h1 class="main-header">🎲 Synthetic Data Generator</h1>', unsafe_allow_html=True)
-    st.markdown("**Generate realistic synthetic data for testing, development, and analysis**")
+    st.markdown("**Generate synthetic data for testing, development, and analysis**")
     
     # Initialize generator
     if 'generator' not in st.session_state:
@@ -888,28 +1070,25 @@ def main():
     # Data type selection
     data_type = st.sidebar.selectbox(
         "Select Data Type",
-        ["Personal/Customer Data", "Sales Transactions", "Employee Records", "Time Series", "Text Data", "Application Logs", "System Data"],
+        ["Personal/Customer Data", "Sales Transactions", "Employee Records", "Time Series", "Application Logs", "System Data", "Correlated VM Data"],
         help="Choose the type of synthetic data to generate"
     )
     
     # Number of records
     if data_type == "Time Series":
-        num_records = st.sidebar.slider("Number of Data Points", 50, 10000, 365)
+        num_records = st.sidebar.slider("Number of Data Points", 50, 10000, 100)
+    elif data_type == "Correlated VM Data":
+        num_records = st.sidebar.slider("Number of Time Intervals", 50, 10000, 100)
     else:
-        num_records = st.sidebar.slider("Number of Records", 10, 10000, 100)
+        num_records = st.sidebar.slider("Number of Records", 50, 10000, 100)
     
     # Additional options based on data type
     text_type = None
     log_type = None
     system_type = None
+    correlation_type = None
     
-    if data_type == "Text Data":
-        text_type = st.sidebar.selectbox(
-            "Text Type",
-            ["reviews", "blog_posts", "social_media"],
-            format_func=lambda x: x.replace('_', ' ').title()
-        )
-    
+        
     if data_type == "Application Logs":
         log_type = st.sidebar.selectbox(
             "Log Type",
@@ -926,10 +1105,26 @@ def main():
             help="Choose the type of system data to generate"
         )
     
+    if data_type == "Correlated VM Data":
+        correlation_type = st.sidebar.selectbox(
+            "Correlation Scenario",
+            ["performance_issues", "normal_operations", "mixed_scenarios"],
+            format_func=lambda x: x.replace('_', ' ').title(),
+            help="Choose the correlation scenario between VM metrics and application logs"
+        )
+        
+        st.sidebar.info("""
+        📊 **Generates two correlated datasets:**
+        - VM System Metrics
+        - Application Logs
+        
+        Both share timestamps and hostname for correlation analysis.
+        """)    
+    
     # Export format
     export_format = st.sidebar.selectbox(
         "Export Format",
-        ["CSV", "JSON", "Excel", "All Formats"],
+        ["CSV", "JSON", "Excel"],
         help="Choose download format"
     )
     
@@ -938,20 +1133,21 @@ def main():
                f"Format: {export_format}" + 
                (f", Text Type: {text_type}" if text_type else "") +
                (f", Log Type: {log_type}" if log_type else "") +
-               (f", System Type: {system_type}" if system_type else ""))
+               (f", System Type: {system_type}" if system_type else "") +
+               (f", Correlation Type: {correlation_type}" if correlation_type else ""))
     
     # Generation section
     st.sidebar.markdown("---")
-    generate_btn = st.sidebar.button("🚀 Generate Data", type="primary", use_container_width=True)
+    generate_btn = st.sidebar.button("🚀 Generate Synthetic Data", type="primary", use_container_width=True)
     
     # Main content area
     col1, col2, col3 = st.columns([1, 2, 1])
     
     if generate_btn:
-        logger.info(f"Data generation initiated by user - Type: {data_type}, Records: {num_records}")
+        logger.info(f"Data generation initiated - Type: {data_type}, Records: {num_records}")
         
         try:
-            with st.spinner("Generating synthetic data..."):
+            with st.spinner("Generating Synthetic Data..."):
                 start_time = datetime.now()
                 
                 # Generate data based on type
@@ -963,12 +1159,17 @@ def main():
                     df = st.session_state.generator.generate_employee_data(num_records)
                 elif data_type == "Time Series":
                     df = st.session_state.generator.generate_time_series(num_records)
-                elif data_type == "Text Data":
-                    df = st.session_state.generator.generate_text_data(num_records, text_type)
                 elif data_type == "Application Logs":
                     df = st.session_state.generator.generate_log_data(num_records, log_type)
-                else:  # System Data
+                elif data_type == "System Data":
                     df = st.session_state.generator.generate_system_data(num_records, system_type)
+                else:  # Correlated VM Data
+                    vm_metrics_df, app_logs_df = st.session_state.generator.generate_correlated_vm_data(num_records, correlation_type)
+                    
+                    # Store both DataFrames
+                    st.session_state.vm_metrics_data = vm_metrics_df
+                    st.session_state.app_logs_data = app_logs_df
+                    df = vm_metrics_df  # Use VM metrics as primary for display
                 
                 total_time = (datetime.now() - start_time).total_seconds()
                 
@@ -1115,6 +1316,7 @@ def main():
             - **Text Data**: Reviews, posts, social media content
             - **Application Logs**: System events, user actions, errors
             - **System Data**: OS logs, metrics, security events
+            - **Correlated VM Data**: VM metrics + logs with matching timestamps
             """)
         
         with col2:
@@ -1123,7 +1325,7 @@ def main():
             - **Realistic Data**: Uses Faker library for authentic-looking data
             - **Multiple Formats**: CSV, JSON, Excel export options
             - **Instant Preview**: See your data before downloading
-            - **Scalable**: Generate from 10 upto 10,000 records
+            - **Scalable**: Generate from 10 to 5,000+ records
             - **No Setup**: Ready to use immediately
             """)
 
