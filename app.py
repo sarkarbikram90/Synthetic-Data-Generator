@@ -74,22 +74,8 @@ st.markdown("""
         text-align: center;
     }
     
-    .landing-hero {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        padding: 4rem 2rem;
-        border-radius: 15px;
-        text-align: center;
-        margin: 2rem 0;
-    }
     
-    .landing-hero h1 {
-        font-size: 3.5rem;
-        font-weight: bold;
-        margin-bottom: 1rem;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    }
-    
+      
     .landing-hero p {
         font-size: 1.3rem;
         margin-bottom: 2rem;
@@ -135,10 +121,7 @@ st.markdown("""
         box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
     }
     
-    .cta-button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
-    }
+  
     
     .stats-showcase {
         background: #f8f9fa;
@@ -175,80 +158,21 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 def show_landing_page():
-    """Display the landing page"""
     
-    logger.info("Landing page displayed")
     
-    # Hero Section
-    st.markdown("""
-    <div class="landing-hero">
-        <h1>🎲 SynthData Generator</h1>
-        <p>Generate realistic, privacy-safe synthetic data for testing, development, and analysis</p>
-        <p style="font-size: 1.1rem; opacity: 0.8;">
-            Transform your synthetic data generation process with ease. No real data, no privacy risks, just pure synthetic goodness.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
     
-    # Call-to-Action
-    col1, col2, col3 = st.columns([1, 2, 1])
-    with col2:
-        if st.button("🚀 Start Generating Data", key="cta_button", help="Click to access the data generator"):
-            st.session_state.show_app = True
-            st.rerun()
-    
-    # Features Grid
-    st.markdown("""
-    <div class="feature-grid">
-        <div class="feature-item">
-            <div class="feature-icon">👤</div>
-            <h3>Personal & Business Data</h3>
-            <p>Generate customer profiles, employee records, and sales transactions with realistic relationships and patterns.</p>
-        </div>
-        
-        <div class="feature-item">
-            <div class="feature-icon">📊</div>
-            <h3>System & Infrastructure</h3>
-            <p>Create VM metrics, application logs, and system monitoring data with intelligent correlations.</p>
-        </div>
-        
-        <div class="feature-item">
-            <div class="feature-icon">📈</div>
-            <h3>Time Series & Analytics</h3>
-            <p>Generate temporal data with realistic trends, seasonality, and statistical properties.</p>
-        </div>
-        
-        <div class="feature-item">
-            <div class="feature-icon">📝</div>
-            <h3>Text & Content</h3>
-            <p>Create product reviews, blog posts, and social media content with authentic language patterns.</p>
-        </div>
-        
-        <div class="feature-item">
-            <div class="feature-icon">🔗</div>
-            <h3>Correlated Datasets</h3>
-            <p>Generate multiple related datasets with shared timestamps and keys for comprehensive testing.</p>
-        </div>
-        
-        <div class="feature-item">
-            <div class="feature-icon">🔒</div>
-            <h3>Privacy-First Design</h3>
-            <p>100% synthetic data means zero privacy risk. GDPR compliant by design with no real data exposure.</p>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
     
     # Stats Showcase
     st.markdown("""
     <div class="stats-showcase">
-        <h2 style="text-align: center; margin-bottom: 2rem;">Why Choose SynthData Generator?</h2>
+        <h2 style="text-align: center; margin-bottom: 2rem;">Why Choose Synthetic Data Generator?</h2>
         <div class="stats-row">
             <div class="stat-item">
-                <div class="stat-number">8+</div>
+                <div class="stat-number">7+</div>
                 <div class="stat-label">Data Types</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number">5000+</div>
+                <div class="stat-number">10,000</div>
                 <div class="stat-label">Records/Minute</div>
             </div>
             <div class="stat-item">
@@ -303,50 +227,15 @@ def show_landing_page():
         - GDPR and CCPA compliant by default
         - No data residency concerns
         
-        **Realistic & Intelligent**
-        - Maintains statistical properties
-        - Logical relationships between fields
-        - Industry-specific patterns and formats
-        
+              
         **Developer Friendly**
         - Multiple export formats (CSV, JSON, Excel)
-        - Easy API integration potential
         - Open source and customizable
         """)
     
-    # Industry Examples
-    st.markdown("""
-    ### 🏭 **Industry Use Cases**
-    """)
     
-    industries_col1, industries_col2, industries_col3 = st.columns(3)
     
-    with industries_col1:
-        st.markdown("""
-        **🏥 Healthcare**
-        - Patient record testing
-        - Clinical trial simulations
-        - Medical device data validation
-        - HIPAA-compliant development
-        """)
     
-    with industries_col2:
-        st.markdown("""
-        **💰 Financial Services**
-        - Transaction processing testing
-        - Risk model validation
-        - Fraud detection training
-        - Regulatory compliance testing
-        """)
-    
-    with industries_col3:
-        st.markdown("""
-        **🛒 E-commerce**
-        - Customer behavior analysis
-        - Inventory management testing
-        - Recommendation system training
-        - A/B testing scenarios
-        """)
     
     # Technology Stack
     st.markdown("""
@@ -371,20 +260,9 @@ def show_landing_page():
         </div>
         """, unsafe_allow_html=True)
         
-        if st.button("🎲 Generate Your First Dataset", key="final_cta", help="Start using the synthetic data generator"):
-            st.session_state.show_app = True
-            st.rerun()
+        
     
-    # Footer
-    st.markdown("""
-    ---
-    <div style="text-align: center; color: #666; padding: 1rem;">
-        <p>
-            <strong>SynthData Generator</strong> - Privacy-first synthetic data for the modern world<br>
-            Built with ❤️ by Bikram, for Machine Learning Engineers and Developers<br>
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
+    
 
 # Initialize session state
 if 'show_app' not in st.session_state:
@@ -1650,6 +1528,17 @@ def main():
             - **Scalable**: Generate from 50 to 10,000 records
             - **No Setup**: Ready to use immediately
             """)
+
+# Footer
+    st.markdown("""
+    ---
+    <div style="text-align: center; color: #666; padding: 1rem;">
+        <p>
+            Privacy-first synthetic data for the modern world<br>
+            Built by Bikram for Machine Learning Engineers and Developers<br>
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
