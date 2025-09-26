@@ -96,11 +96,13 @@ class SyntheticDataGenerator:
                 if i > 0 and i % 1000 == 0:
                     logger.info(f"Generated {i}/{num_records} personal records")
                 
+                first_name = self.fake.first_name()
+                last_name = self.fake.last_name()
                 record = {
                     'id': self.fake.uuid4(),
-                    'first_name': self.fake.first_name(),
-                    'last_name': self.fake.last_name(),
-                    'email': self.fake.email(),
+                    'first_name': first_name,
+                    'last_name': last_name,
+                    'email': f"{first_name.lower()}.{last_name.lower()}@example.com",
                     'phone': self.fake.phone_number(),
                     'address': self.fake.address().replace('\n', ', '),
                     'city': self.fake.city(),
@@ -109,8 +111,8 @@ class SyntheticDataGenerator:
                     'birth_date': self.fake.date_of_birth(minimum_age=18, maximum_age=80),
                     'gender': random.choice(['Male', 'Female', 'Other']),
                     'occupation': self.fake.job(),
-                    'salary': random.randint(30000, 150000),
-                    'created_at': self.fake.date_time_between(start_date='-2y', end_date='now')
+                    'salary': random.randint(15000, 1500000),
+                    'created_at': self.fake.date_time_between(start_date='-10y', end_date='now')
                 }
                 data.append(record)
             
