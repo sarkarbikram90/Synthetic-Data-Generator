@@ -168,12 +168,12 @@ def show_landing_page():
         <h2 style="text-align: center; margin-bottom: 2rem;">Synthetic Data Generator</h2>
         <div class="stats-row">
             <div class="stat-item">
-                <div class="stat-number">7+</div>
+                <div class="stat-number">7</div>
                 <div class="stat-label">Data Types</div>
             </div>
             <div class="stat-item">
                 <div class="stat-number">10,000</div>
-                <div class="stat-label">Records/Minute</div>
+                <div class="stat-label">Records/Seconds</div>
             </div>
             <div class="stat-item">
                 <div class="stat-number">3</div>
