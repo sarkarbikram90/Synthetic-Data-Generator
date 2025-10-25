@@ -1535,7 +1535,7 @@ def main():
     <div style="text-align: center; color: #666; padding: 1rem;">
         <p>
             Privacy-first synthetic data for the modern world<br>
-            Built by <a href="https://www.linkedin.com/in/bikramsarkar/" target="_blank">Bikram</a> for Machine Learning Engineers and Developers<br>
+            Built by <a href="https://www.linkedin.com/in/bikramsarkar/" target="_blank">Bikram</a> for Data and ML Engineers<br>
         </p>
     </div>
     """, unsafe_allow_html=True)
