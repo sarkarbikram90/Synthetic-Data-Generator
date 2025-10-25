@@ -181,11 +181,48 @@ def show_landing_page():
             </div>
             <div class="stat-item">
                 <div class="stat-number">100%</div>
-                <div class="stat-label">Privacy Safe</div>
+                <div class="stat-label">Privacy</div>
             </div>
         </div>
     </div>
     """, unsafe_allow_html=True)
+
+    # Welcome message
+        st.markdown("""
+        <div class="feature-card">
+            <h3>🎯 Quick Start</h3>
+            <p>1. Choose your data type from the sidebar</p>
+            <p>2. Set the number of records to generate</p>
+            <p>3. Select your preferred export format</p>
+            <p>4. Click "Generate Synthetic Data"</p>
+            <p>5. Preview and download your generated dataset</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Feature overview
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.markdown("""
+            ### 📋 Available Data Types
+            - **Personal/Customer Data**: Names, addresses, contact info
+            - **Sales Transactions**: Purchase records, revenue data
+            - **Employee Records**: HR data, performance metrics
+            - **Time Series**: Temporal data with trends
+            - **Application Logs**: System events, user actions, errors
+            - **System Data**: OS logs, metrics, security events
+            - **Correlated VM Data**: VM metrics + logs with matching timestamps
+            """)
+        
+        with col2:
+            st.markdown("""
+            ### ✨ Key Features
+            - **Realistic Data**: Uses Faker library for authentic-looking data
+            - **Multiple Formats**: CSV, JSON, Excel export options
+            - **Instant Preview**: See your data before downloading
+            - **Scalable**: Generate from 50 to 10,000 records
+            - **No Setup**: Ready to use immediately
+            """)
     
     # Use Cases Section
     col1, col2 = st.columns(2)
@@ -233,9 +270,7 @@ def show_landing_page():
         - Open source and customizable
         """)
     
-    
-    
-    
+  
     
     # Technology Stack
     st.markdown("""
@@ -262,8 +297,6 @@ def show_landing_page():
         
         
     
-    
-
 # Initialize session state
 if 'show_app' not in st.session_state:
     st.session_state.show_app = False
@@ -1492,42 +1525,7 @@ def main():
                 logger.info(f"User downloaded ZIP package, Size: {len(zip_buffer.getvalue())} bytes")
     
     else:
-        # Welcome message
-        st.markdown("""
-        <div class="feature-card">
-            <h3>🎯 Quick Start</h3>
-            <p>1. Choose your data type from the sidebar</p>
-            <p>2. Set the number of records to generate</p>
-            <p>3. Select your preferred export format</p>
-            <p>4. Click "Generate Synthetic Data"</p>
-            <p>5. Preview and download your generated dataset</p>
-        </div>
-        """, unsafe_allow_html=True)
         
-        # Feature overview
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            st.markdown("""
-            ### 📋 Available Data Types
-            - **Personal/Customer Data**: Names, addresses, contact info
-            - **Sales Transactions**: Purchase records, revenue data
-            - **Employee Records**: HR data, performance metrics
-            - **Time Series**: Temporal data with trends
-            - **Application Logs**: System events, user actions, errors
-            - **System Data**: OS logs, metrics, security events
-            - **Correlated VM Data**: VM metrics + logs with matching timestamps
-            """)
-        
-        with col2:
-            st.markdown("""
-            ### ✨ Key Features
-            - **Realistic Data**: Uses Faker library for authentic-looking data
-            - **Multiple Formats**: CSV, JSON, Excel export options
-            - **Instant Preview**: See your data before downloading
-            - **Scalable**: Generate from 50 to 10,000 records
-            - **No Setup**: Ready to use immediately
-            """)
 
 # Footer
     st.markdown("""
