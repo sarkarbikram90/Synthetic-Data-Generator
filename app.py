@@ -188,7 +188,7 @@ def show_landing_page():
     """, unsafe_allow_html=True)
 
     # Welcome message
-        st.markdown("""
+    st.markdown("""
         <div class="feature-card">
             <h3>🎯 Quick Start</h3>
             <p>1. Choose your data type from the sidebar</p>
@@ -200,9 +200,9 @@ def show_landing_page():
         """, unsafe_allow_html=True)
         
         # Feature overview
-        col1, col2 = st.columns(2)
+    col1, col2 = st.columns(2)
         
-        with col1:
+    with col1:
             st.markdown("""
             ### 📋 Available Data Types
             - **Personal/Customer Data**: Names, addresses, contact info
