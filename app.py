@@ -214,7 +214,7 @@ def show_landing_page():
             - **Correlated VM Data**: VM metrics + logs with matching timestamps
             """)
         
-        with col2:
+    with col2:
             st.markdown("""
             ### ✨ Key Features
             - **Realistic Data**: Uses Faker library for authentic-looking data
