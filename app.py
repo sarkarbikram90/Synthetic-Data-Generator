@@ -159,8 +159,7 @@ st.markdown("""
 
 def show_landing_page():
     
-    
-    
+       
     
     # Stats Showcase
     st.markdown("""
@@ -1524,8 +1523,8 @@ def main():
             ):
                 logger.info(f"User downloaded ZIP package, Size: {len(zip_buffer.getvalue())} bytes")
     
-    else:
-        
+    # else:
+        st.warning("No files available for download.")
 
 # Footer
         st.markdown("""
