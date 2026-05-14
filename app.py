@@ -49,33 +49,50 @@ st.set_page_config(
 st.markdown("""
 <style>
     .main-header {
-        font-size: 3rem;
-        font-weight: bold;
+        font-size: 3.5rem;
+        font-weight: 800;
         text-align: center;
         margin-bottom: 2rem;
-        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #45B7D1 100%);
+        background-size: 200% auto;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        animation: gradient 5s ease infinite;
+    }
+    @keyframes gradient {
+        0% {background-position: 0% 50%;}
+        50% {background-position: 100% 50%;}
+        100% {background-position: 0% 50%;}
     }
     
     .feature-card {
-        background-color: #f8f9fa;
+        background-color: #ffffff;
         padding: 1.5rem;
-        border-radius: 10px;
-        border-left: 4px solid #667eea;
+        border-radius: 12px;
+        border-left: 5px solid #4ECDC4;
         margin: 1rem 0;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .feature-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
     }
     
     .stats-card {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
         color: white;
-        padding: 1rem;
-        border-radius: 8px;
+        padding: 1.5rem;
+        border-radius: 12px;
         text-align: center;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+    .stats-card:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.2);
     }
     
-    
-      
     .landing-hero p {
         font-size: 1.3rem;
         margin-bottom: 2rem;
@@ -92,15 +109,15 @@ st.markdown("""
     .feature-item {
         background: white;
         padding: 2rem;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        border-top: 4px solid #667eea;
-        transition: transform 0.3s ease;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        border-top: 5px solid #4ECDC4;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     
     .feature-item:hover {
         transform: translateY(-5px);
-        box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
     }
     
     .feature-icon {
@@ -109,7 +126,7 @@ st.markdown("""
     }
     
     .cta-button {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
         color: white;
         padding: 1rem 3rem;
         border: none;
@@ -118,16 +135,20 @@ st.markdown("""
         font-weight: bold;
         cursor: pointer;
         transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
+    }
+    .cta-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(78, 205, 196, 0.6);
     }
     
-  
-    
     .stats-showcase {
-        background: #f8f9fa;
-        padding: 2rem;
-        border-radius: 10px;
+        background: #ffffff;
+        padding: 2.5rem;
+        border-radius: 15px;
         margin: 2rem 0;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        border-top: 5px solid #FF6B6B;
     }
     
     .stats-row {
@@ -141,18 +162,25 @@ st.markdown("""
         text-align: center;
         padding: 1rem;
         min-width: 150px;
+        transition: transform 0.3s ease;
+    }
+    .stat-item:hover {
+        transform: scale(1.1);
     }
     
     .stat-number {
-        font-size: 2.5rem;
-        font-weight: bold;
-        color: #667eea;
+        font-size: 3rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
     
     .stat-label {
         font-size: 1rem;
         color: #666;
         margin-top: 0.5rem;
+        font-weight: 500;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -167,7 +195,7 @@ def show_landing_page():
         <h2 style="text-align: center; margin-bottom: 2rem;">Synthetic Data Generator</h2>
         <div class="stats-row">
             <div class="stat-item">
-                <div class="stat-number">7</div>
+                <div class="stat-number">10</div>
                 <div class="stat-label">Data Types</div>
             </div>
             <div class="stat-item">
@@ -211,6 +239,9 @@ def show_landing_page():
             - **Application Logs**: System events, user actions, errors
             - **System Data**: OS logs, metrics, security events
             - **Correlated VM Data**: VM metrics + logs with matching timestamps
+            - **IoT Data**: Sensors, telemetry, devices
+            - **Healthcare Data**: Patients, admissions, health metrics
+            - **Finance Data**: Transactions, accounts, fraud
             """)
         
     with col2:
@@ -1223,6 +1254,142 @@ class SyntheticDataGenerator:
             logger.error(f"Correlated VM data generation failed: {str(e)}")
             raise
 
+    def generate_iot_data(self, num_records: int) -> pd.DataFrame:
+        """Generate IoT sensor data with logging"""
+        logger.info(f"Starting IoT data generation - Records: {num_records}")
+        start_time = datetime.now()
+        try:
+            data = []
+            sensor_types = ['Temperature', 'Humidity', 'Pressure', 'Motion', 'Light']
+            statuses = ['Active', 'Active', 'Active', 'Inactive', 'Error']
+            
+            for i in range(num_records):
+                if i > 0 and i % 1000 == 0:
+                    logger.info(f"Generated {i}/{num_records} IoT records")
+                
+                sensor_type = random.choice(sensor_types)
+                value = 0.0
+                if sensor_type == 'Temperature':
+                    value = round(random.uniform(-20, 50), 2)
+                elif sensor_type == 'Humidity':
+                    value = round(random.uniform(0, 100), 2)
+                elif sensor_type == 'Pressure':
+                    value = round(random.uniform(900, 1100), 2)
+                elif sensor_type == 'Motion':
+                    value = random.choice([0, 1])
+                elif sensor_type == 'Light':
+                    value = round(random.uniform(0, 1000), 2)
+                    
+                record = {
+                    'device_id': f"IoT_{self.fake.uuid4()[:8]}",
+                    'timestamp': self.fake.date_time_between(start_date='-30d', end_date='now'),
+                    'sensor_type': sensor_type,
+                    'reading_value': value,
+                    'unit': 'C' if sensor_type == 'Temperature' else ('%' if sensor_type == 'Humidity' else ('hPa' if sensor_type == 'Pressure' else ('lux' if sensor_type == 'Light' else 'bool'))),
+                    'status': random.choice(statuses),
+                    'battery_level': round(random.uniform(5, 100), 1),
+                    'latitude': float(self.fake.latitude()),
+                    'longitude': float(self.fake.longitude()),
+                    'firmware_version': f"v{random.randint(1,5)}.{random.randint(0,9)}.{random.randint(0,9)}"
+                }
+                data.append(record)
+            
+            df = pd.DataFrame(data)
+            generation_time = (datetime.now() - start_time).total_seconds()
+            memory_usage = df.memory_usage(deep=True).sum() / 1024 / 1024
+            logger.info(f"IoT data generation completed - Records: {len(df)}, Time: {generation_time:.2f}s, Memory: {memory_usage:.2f}MB")
+            return df
+        except Exception as e:
+            logger.error(f"IoT data generation failed: {str(e)}")
+            raise
+
+    def generate_healthcare_data(self, num_records: int) -> pd.DataFrame:
+        """Generate healthcare data with logging"""
+        logger.info(f"Starting healthcare data generation - Records: {num_records}")
+        start_time = datetime.now()
+        try:
+            data = []
+            blood_types = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']
+            diagnoses = ['Asthma', 'Diabetes', 'Hypertension', 'Flu', 'Covid-19', 'Migraine', 'Healthy', 'Arthritis', 'Allergy']
+            insurances = ['BlueCross', 'Aetna', 'Cigna', 'UnitedHealthcare', 'Medicare', 'Medicaid', 'Uninsured']
+            
+            for i in range(num_records):
+                if i > 0 and i % 1000 == 0:
+                    logger.info(f"Generated {i}/{num_records} healthcare records")
+                
+                admission = self.fake.date_time_between(start_date='-1y', end_date='now')
+                discharge = admission + timedelta(days=random.randint(0, 14))
+                if discharge > datetime.now():
+                    discharge = None
+                
+                record = {
+                    'patient_id': f"PT_{random.randint(10000, 99999)}",
+                    'age': random.randint(1, 100),
+                    'gender': random.choice(['Male', 'Female', 'Other']),
+                    'blood_type': random.choice(blood_types),
+                    'diagnosis': random.choice(diagnoses),
+                    'heart_rate_bpm': random.randint(60, 120),
+                    'systolic_bp': random.randint(90, 160),
+                    'diastolic_bp': random.randint(60, 100),
+                    'temperature_c': round(random.uniform(36.0, 40.0), 1),
+                    'admission_date': admission,
+                    'discharge_date': discharge,
+                    'treatment_cost': round(random.uniform(100, 50000), 2),
+                    'insurance_provider': random.choice(insurances)
+                }
+                data.append(record)
+            
+            df = pd.DataFrame(data)
+            generation_time = (datetime.now() - start_time).total_seconds()
+            memory_usage = df.memory_usage(deep=True).sum() / 1024 / 1024
+            logger.info(f"Healthcare data generation completed - Records: {len(df)}, Time: {generation_time:.2f}s, Memory: {memory_usage:.2f}MB")
+            return df
+        except Exception as e:
+            logger.error(f"Healthcare data generation failed: {str(e)}")
+            raise
+
+    def generate_finance_data(self, num_records: int) -> pd.DataFrame:
+        """Generate finance data with logging"""
+        logger.info(f"Starting finance data generation - Records: {num_records}")
+        start_time = datetime.now()
+        try:
+            data = []
+            transaction_types = ['Deposit', 'Withdrawal', 'Transfer', 'Payment']
+            currencies = ['USD', 'EUR', 'GBP', 'JPY', 'CAD']
+            categories = ['Groceries', 'Utilities', 'Entertainment', 'Healthcare', 'Salary', 'Rent', 'Dining', 'Travel']
+            statuses = ['Completed', 'Completed', 'Completed', 'Pending', 'Failed']
+            
+            for i in range(num_records):
+                if i > 0 and i % 1000 == 0:
+                    logger.info(f"Generated {i}/{num_records} finance records")
+                
+                amount = round(random.uniform(5, 10000), 2)
+                txn_type = random.choice(transaction_types)
+                
+                record = {
+                    'transaction_id': self.fake.uuid4(),
+                    'account_id': f"ACC_{random.randint(100000, 999999)}",
+                    'transaction_type': txn_type,
+                    'amount': amount,
+                    'currency': random.choice(currencies),
+                    'merchant_name': self.fake.company() if txn_type in ['Payment', 'Withdrawal'] else 'Bank Transfer',
+                    'category': random.choice(categories),
+                    'transaction_date': self.fake.date_time_between(start_date='-2y', end_date='now'),
+                    'status': random.choice(statuses),
+                    'risk_score': round(random.uniform(0.0, 1.0), 3),
+                    'is_fraudulent': random.choices([True, False], weights=[0.05, 0.95])[0]
+                }
+                data.append(record)
+            
+            df = pd.DataFrame(data)
+            generation_time = (datetime.now() - start_time).total_seconds()
+            memory_usage = df.memory_usage(deep=True).sum() / 1024 / 1024
+            logger.info(f"Finance data generation completed - Records: {len(df)}, Time: {generation_time:.2f}s, Memory: {memory_usage:.2f}MB")
+            return df
+        except Exception as e:
+            logger.error(f"Finance data generation failed: {str(e)}")
+            raise
+
 def create_download_files(df, export_format):
     """Create download files with logging"""
     
@@ -1303,7 +1470,7 @@ def main():
     # Data type selection
     data_type = st.sidebar.selectbox(
         "Select Data Type",
-        ["Personal/Customer Data", "Sales Transactions", "Employee Records", "Time Series", "Application Logs", "System Data", "Correlated VM Data"],
+        ["Personal/Customer Data", "Sales Transactions", "Employee Records", "Time Series", "Application Logs", "System Data", "Correlated VM Data", "IoT Data", "Healthcare Data", "Finance Data"],
         help="Choose the type of synthetic data to generate"
     )
     
@@ -1396,6 +1563,12 @@ def main():
                     df = st.session_state.generator.generate_log_data(num_records, log_type)
                 elif data_type == "System Data":
                     df = st.session_state.generator.generate_system_data(num_records, system_type)
+                elif data_type == "IoT Data":
+                    df = st.session_state.generator.generate_iot_data(num_records)
+                elif data_type == "Healthcare Data":
+                    df = st.session_state.generator.generate_healthcare_data(num_records)
+                elif data_type == "Finance Data":
+                    df = st.session_state.generator.generate_finance_data(num_records)
                 else:  # Correlated VM Data
                     vm_metrics_df, app_logs_df = st.session_state.generator.generate_correlated_vm_data(num_records, correlation_type)
                     
